@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none" >
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+
+    <TextView
+        android:id="@+id/labelScheda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Scheda Alimento"
+        android:textStyle="bold"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/labelNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/labelScheda"
+        android:layout_marginTop="20dp"
+        android:text="Nome alimento"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/labelScheda"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="10"
+        android:inputType="text">
+
+        <requestFocus />
+    </EditText>
+        <TextView
+            android:id="@+id/labelClasse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editNome"
+            android:layout_marginTop="10dp"
+            android:text="Classe"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+        <EditText
+            android:id="@+id/editClasse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editNome"
+            android:layout_marginLeft="130dp"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:ems="10"
+            android:inputType="text">
+
+        </EditText>
+
+    <TextView
+        android:id="@+id/labelKcal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editClasse"
+        android:text="Kcal"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editKcal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editClasse"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+    <TextView
+        android:id="@+id/labelGrassi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editKcal"
+        android:layout_marginTop="10dp"
+        android:text="Grassi"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editGrassi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editKcal"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+    <TextView
+        android:id="@+id/labelProteine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editGrassi"
+        android:layout_marginTop="10dp"
+        android:text="Proteine"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editProteine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editGrassi"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+
+        <TextView
+        android:id="@+id/labelGlucidi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editProteine"
+        android:layout_marginTop="10dp"
+        android:text="Glucidi"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editGlucidi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editProteine"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+
+        <TextView
+        android:id="@+id/labelFibre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editGlucidi"
+        android:layout_marginTop="10dp"
+        android:text="Fibre"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editFibre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editGlucidi"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+
+        <TextView
+        android:id="@+id/labelSodio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editFibre"
+        android:layout_marginTop="10dp"
+        android:text="Sodio"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editSodio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editFibre"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+
+        <TextView
+        android:id="@+id/labelPotassio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editSodio"
+        android:layout_marginTop="10dp"
+        android:text="Potassio"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editPotassio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editSodio"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+
+        <TextView
+        android:id="@+id/labelCalcio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editPotassio"
+        android:layout_marginTop="10dp"
+        android:text="Calcio"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editCalcio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editPotassio"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+
+        <TextView
+        android:id="@+id/labelFerro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editCalcio"
+        android:layout_marginTop="10dp"
+        android:text="Ferro"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editFerro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editCalcio"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+
+        <TextView
+        android:id="@+id/labelVitA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editFerro"
+        android:layout_marginTop="10dp"
+        android:text="Vitamina A"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editVitA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editFerro"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+
+        <TextView
+        android:id="@+id/labelVitB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editVitA"
+        android:layout_marginTop="10dp"
+        android:text="Vitamina B"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editVitB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editVitA"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+
+        <TextView
+        android:id="@+id/labelVitC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editVitB"
+        android:layout_marginTop="10dp"
+        android:text="Vitamina C"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <EditText
+        android:id="@+id/editVitC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editVitB"
+        android:layout_marginLeft="130dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:inputType="numberDecimal"></EditText>
+        <TextView
+            android:id="@+id/labelVitD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editVitC"
+            android:layout_marginTop="10dp"
+            android:text="Vitamina D"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+        <EditText
+            android:id="@+id/editVitD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editVitC"
+            android:layout_marginLeft="130dp"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:ems="4"
+            android:inputType="numberDecimal"></EditText>
+        <TextView
+            android:id="@+id/labelVitE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editVitD"
+            android:layout_marginTop="10dp"
+            android:text="Vitamina E"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+        <EditText
+            android:id="@+id/editVitE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editVitD"
+            android:layout_marginLeft="130dp"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:ems="4"
+            android:inputType="numberDecimal"></EditText>
+        <Button
+           android:id="@+id/button1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/editClasse"
+           android:layout_alignParentRight="true"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="5dp"
+           android:onClick="aggiungi"
+           android:text="Aggiungi" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button1"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:onClick="salva"
+            android:enabled="false"
+            android:text="Salva" />
+</RelativeLayout>
+</ScrollView>

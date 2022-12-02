@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hichem</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="Add_New">Aggiungi</string>
+    <string name="edit">Modifica</string>
+    <string name="delete">Elimina</string>
+    <string name="ordina">Ordina MP</string>
+    <string name="ordinaimb">Ordina IMB</string>
+    <string name="title_activity_display_contact">Fornitore</string>
+    <string name="name">Rag. Soc.</string>
+    <string name="phone">Tel.</string>
+    <string name="email">Email</string>
+    <string name="street">Indirizzo</string>
+    <string name="country">Agente</string>
+    <string name="save">Aggiungi</string>
+    <string name="deleteContact">Sei sicuro di eliminare?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="MPnome">Prodotto</string>
+    <string name="MPquant">Quantità</string>
+    <string name="MPprezzo">Prezzo</string>
+    <string name="MPforn">Fornitore</string>
+    <string name="Buttonforn">Selez.</string>
+    <string name="ModPercent">Modifica Percentuale</string>
+    <string name="ElimComp">Elimina Componente</string>
+    <string name="ModQuant">Modifica Quantità</string>
+    <string name="ElimConf">Elimina Confezione</string>
+    <string name="input_placeholder">Write a message</string>
+</resources>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1097112690518",
+    "firebase_url": "https://personalchat-54914.firebaseio.com",
+    "project_id": "personalchat-54914",
+    "storage_bucket": "personalchat-54914.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097112690518:android:cb91dc982a6249d6",
+        "android_client_info": {
+          "package_name": "com.example.banco.androidchattutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097112690518-mj6rcc3m2fr180evvcn20424ujmsvdtm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkANtRaRE9DAD_Ufd73JttSJ3dgRQ03Ig"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

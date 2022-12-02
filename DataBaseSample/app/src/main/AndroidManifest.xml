@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.banco.databasesample" >
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.Light"
+        >
+
+
+
+        <activity
+            android:name="MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name="DisplayContact"
+            android:parentActivityName=".Fornitori"/>
+        <activity android:name="DisplayConfezioni"
+            android:label="DisplayConfezioni"
+            android:parentActivityName=".Confezioni"/>
+        <activity android:name="DisplayMateriePrime"
+            android:parentActivityName=".MateriePrime"/>
+        <activity android:name="DisplayImballaggi"
+            android:parentActivityName=".Imballaggi"/>
+        <activity android:name="DisplayFormule"
+            android:parentActivityName=".Formule"/>
+        <activity android:name="DuplicaFormula"
+            android:parentActivityName=".Formule"/>
+        <activity android:name="Fornitori"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name="Imballaggi"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name="Formule"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name="Inventario"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name="Confezioni"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name="ChatMain"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name="MateriePrime"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name="Quantita"/>
+        <activity android:name="OrdineFornitore"
+            android:parentActivityName=".DisplayContact"/>
+        <activity android:name="OrdineFornitoreImb"
+            android:parentActivityName=".DisplayContact"/>
+        <activity android:name="MprPercent"
+            android:parentActivityName=".DisplayFormule"/>
+        <activity android:name="ModifPercent"
+            android:parentActivityName=".DisplayFormule"/>
+        <activity android:name="ConfDiFormule"
+            android:parentActivityName=".DisplayFormule"/>
+        <activity android:name="ImbQuant"
+            android:parentActivityName=".DisplayConfezioni"/>
+        <activity android:name="settings"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name="Produzione"
+            android:parentActivityName=".DisplayFormule"/>
+        <activity android:name="CostoConfezione"
+            android:parentActivityName=".DisplayFormule"/>
+        <activity android:name="TestoEmail"
+            android:parentActivityName=".settings"/>
+        <activity android:name="AndroidExplorer"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false">
+
+
+        <TextView
+            android:text="Selezionare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:id="@+id/textView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="32dp" />
+        <Button
+            android:text="TABELLA ALIMENTI"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/butselected"
+            android:id="@+id/ButAlimenti"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:onClick="ALIMselected"
+        />
+            <Button
+                android:text="DIETA SETTIMANALE"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/butselected"
+                android:id="@+id/ButDieta"
+                android:layout_below="@+id/ButAlimenti"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:onClick="DIETAselected"
+                />
+            <Button
+                android:text="PASTI SALVATI"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/butselected"
+                android:id="@+id/ButPasti"
+                android:layout_below="@+id/ButDieta"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:onClick="PASTIselected"
+                />
+
+
+
+     </RelativeLayout>
+
+

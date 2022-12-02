@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Inserisci in dieta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/labeltitoloinserisci"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textColor="@color/nero"
+        android:textSize="30dp"
+        />
+    <TextView
+        android:text="Lunedì 5 Marzo 2018"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/giorno"
+        android:layout_below="@+id/labeltitoloinserisci"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:layout_alignParentLeft="true"
+        />
+    <TextView
+        android:text="COLAZIONE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pasto"
+        android:layout_below="@+id/labeltitoloinserisci"
+        android:layout_toRightOf="@+id/giorno"
+        android:layout_marginLeft="20dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        />
+    <TextView
+        android:id="@+id/labelNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/giorno"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="Nome alimento"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"/>
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/ButScegliAlmento"
+        android:background="@mipmap/modifica"
+        android:layout_toRightOf="@+id/labelNome"
+        android:layout_marginLeft="20dp"
+        android:layout_alignBottom="@+id/labelNome"
+        android:onClick="ottienialimento"
+        />
+    <TextView
+        android:id="@+id/alimento"
+        android:layout_width="210dp"
+        android:layout_height="22dp"
+        android:layout_toRightOf="@+id/ButScegliAlmento"
+        android:layout_alignBottom="@+id/labelNome"
+        android:layout_marginLeft="10dp"
+        android:text="Nome alimento"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+
+    <TextView
+        android:id="@+id/labelquantita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/labelNome"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="Quantità (gr)"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+    <EditText
+        android:id="@+id/editqta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/labelquantita"
+        android:layout_below="@+id/labelNome"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:ems="4"
+        android:text="0"
+        android:layout_marginLeft="20dp"
+        android:inputType="numberDecimal"></EditText>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ButInserisci"
+        android:text="INSERISCI"
+        android:layout_below="@+id/labelquantita"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="inserisciindieta"
+       />
+</RelativeLayout>

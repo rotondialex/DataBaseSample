@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">KaloDiKulo</string>
+    <string name="action_settings">Settings</string>
+    <string name="yes">Sì</string>
+    <string name="no">No</string>
+    <string name="maialino1txt">Un po\' troppino non credi?</string>
+    <string name="salva">Salva</string>
+    <string name="annulla">Annulla</string>
+</resources>

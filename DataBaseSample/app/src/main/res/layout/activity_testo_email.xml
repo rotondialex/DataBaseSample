@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical"
+    tools:context=".TestoEmail" >
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".TestoEmail">
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:text="Mail ordini a fornitore" />
+
+    <TextView
+        android:text="Sezione iniziale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textInizio"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        />
+
+     <EditText
+         android:id="@+id/editTestoInizio"
+         android:layout_width="500dp"
+         android:layout_height="200dp"
+         android:layout_below="@+id/textInizio"
+         android:layout_centerHorizontal="true"
+         android:inputType="textMultiLine"
+         android:gravity="top|left"
+         android:scrollbars="vertical"
+         android:background="@drawable/edittextbaxkground"
+         android:ems="10"
+         />
+
+    <TextView
+        android:text="Sezione Finale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textFine"
+        android:layout_below="@+id/editTestoInizio"
+
+        />
+
+    <EditText
+        android:id="@+id/editTestoFine"
+        android:layout_width="500dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/textFine"
+        android:layout_alignParentLeft="true"
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:scrollbars="vertical"
+        android:background="@drawable/edittextbaxkground"
+        android:ems="10"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/buttonSalva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="SalvaEmail"
+        android:text="SALVA"
+        android:layout_below="@+id/editTestoFine"
+        android:layout_alignStart="@+id/editTestoFine"
+         />
+    <Button
+        android:id="@+id/buttonAnnulla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="AnnullaEmail"
+        android:text="ANNULLA"
+        android:layout_below="@+id/editTestoFine"
+        android:layout_alignRight="@+id/editTestoFine"
+        />
+</RelativeLayout>
+    </ScrollView>

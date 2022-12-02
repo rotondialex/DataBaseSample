@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/labeltitoloinserisci"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Inserisci pasto in dieta"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/nero"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+    <TextView
+        android:text="Lunedì 5 Marzo 2018"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/giorno"
+        android:layout_below="@+id/labeltitoloinserisci"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:layout_alignParentLeft="true"
+        />
+    <TextView
+        android:text="COLAZIONE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pasto"
+        android:layout_below="@+id/labeltitoloinserisci"
+        android:layout_toRightOf="@+id/giorno"
+        android:layout_marginLeft="20dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        />
+    <TextView
+        android:id="@+id/labelNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:text="Pasto selezionato"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:layout_below="@+id/pasto"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/alimento"
+        android:layout_width="180dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="10dp"
+        android:text="Nessun pasto selezionato"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:layout_alignBaseline="@+id/labelNome"
+        android:layout_alignBottom="@+id/labelNome"
+        android:layout_toEndOf="@+id/giorno" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pulsante_arrotondato"
+        android:text="IMPORTA"
+        android:textSize="10dp"
+        android:id="@+id/copiapasto"
+        android:layout_below="@+id/labeltitoloinserisci"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:layout_toEndOf="@+id/pasto"
+        android:layout_marginLeft="10dp"
+        android:contentDescription="Aggiungi voce"
+        android:onClick="inserisciindieta"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pulsante_arrotondato"
+        android:text="ANNULLA"
+        android:textSize="10dp"
+        android:id="@+id/annullacopia"
+        android:layout_below="@+id/labeltitoloinserisci"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:layout_toEndOf="@+id/copiapasto"
+        android:layout_marginLeft="10dp"
+        android:contentDescription="Annulla"
+        android:onClick="annulla"
+        />
+
+    <ListView
+        android:id="@+id/Listapasti"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/labelNome" />
+
+
+
+
+</RelativeLayout>
