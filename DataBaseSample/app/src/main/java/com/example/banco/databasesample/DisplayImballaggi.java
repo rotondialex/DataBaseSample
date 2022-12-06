@@ -27,6 +27,7 @@ public class DisplayImballaggi extends AppCompatActivity {
     private DBHelper mydb ;
 
     TextView name ;
+    TextView codice ;
     TextView prezzo;
     TextView quant;
     TextView forn;
@@ -45,6 +46,7 @@ public class DisplayImballaggi extends AppCompatActivity {
         forn = (TextView) findViewById(R.id.editTextForn);
         numforn=(TextView) findViewById(R.id.FornitoreSelez);
         ultimod=(TextView) findViewById(R.id.UltimaModifica);
+        codice=(TextView) findViewById(R.id.editCODICE);
 
         mydb = new DBHelper(this,"Hichem.db");
 
@@ -70,9 +72,11 @@ public class DisplayImballaggi extends AppCompatActivity {
                 rs.moveToFirst();
 
                 String nam = rs.getString(rs.getColumnIndex(DBHelper.IMB_COL_NOME));
+                String cod = rs.getString(rs.getColumnIndex(DBHelper.IMB_COL_CODICE));
                 Double prez = rs.getDouble(rs.getColumnIndex(DBHelper.IMB_COL_PREZZO));
                 Double qua = rs.getDouble(rs.getColumnIndex(DBHelper.IMB_COL_QUANTITA));
                 Integer fornit = rs.getInt(rs.getColumnIndex(DBHelper.IMB_COL_FORN));
+                String ultmod = rs.getString(rs.getColumnIndex(DBHelper.IMB_COL_ULTIMAMOD));
 
 
                 if (!rs.isClosed())  {
@@ -89,6 +93,10 @@ public class DisplayImballaggi extends AppCompatActivity {
                 name.setFocusable(false);
                 name.setClickable(false);
 
+                codice.setText((CharSequence)cod);
+                codice.setFocusable(false);
+                codice.setClickable(false);
+
                 String tuaString = Double.toString(prez);
                 prezzo.setText(tuaString);
                 prezzo.setFocusable(false);
@@ -99,7 +107,7 @@ public class DisplayImballaggi extends AppCompatActivity {
                 quant.setFocusable(false);
                 quant.setClickable(false);
 
-
+                ultimod.setText(ultmod);
 
                 if (fornit>0) {
                     final ArrayList<String> array_list = mydb.getAllCotacts();
@@ -149,6 +157,10 @@ public class DisplayImballaggi extends AppCompatActivity {
                 name.setEnabled(true);
                 name.setFocusableInTouchMode(true);
                 name.setClickable(true);
+
+                codice.setEnabled(true);
+                codice.setFocusableInTouchMode(true);
+                codice.setClickable(true);
 
                 prezzo.setEnabled(true);
                 prezzo.setFocusableInTouchMode(true);
@@ -208,7 +220,7 @@ public class DisplayImballaggi extends AppCompatActivity {
             if(Value>0){
                 if(mydb.updateImballaggio(id_To_Update,name.getText().toString(),
                         Double.parseDouble(prezzo.getText().toString()),Double.parseDouble(quant.getText().toString()),
-                        Integer.parseInt(numforn.getText().toString()))){
+                        Integer.parseInt(numforn.getText().toString()),codice.getText().toString())){
                     Toast.makeText(getApplicationContext(), "Aggiornato", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
@@ -218,7 +230,7 @@ public class DisplayImballaggi extends AppCompatActivity {
             } else{
                 if(mydb.insertImballaggio(name.getText().toString(),
                         Double.parseDouble(prezzo.getText().toString()),Double.parseDouble(quant.getText().toString()),
-                        Integer.parseInt(numforn.getText().toString()))){
+                        Integer.parseInt(numforn.getText().toString()),codice.getText().toString())){
                     Toast.makeText(getApplicationContext(), "Aggiunto",
                             Toast.LENGTH_SHORT).show();
                 } else{

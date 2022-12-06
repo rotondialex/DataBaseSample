@@ -13,5 +13,10 @@
         android:id="@+id/Ordina_a_fornitore"
         android:orderInCategory="100"
         android:title="@string/ordina"/>
+    <item
+        android:id="@+id/Potenziali_fornitori"
+        android:orderInCategory="100"
+        android:title="@string/pot_forn"/>
+
 
 </menu>

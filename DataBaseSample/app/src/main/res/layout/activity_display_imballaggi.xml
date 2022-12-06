@@ -21,10 +21,19 @@
             android:layout_alignParentLeft="true"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="82dp"
-            android:ems="10"
+            android:ems="8"
             android:inputType="text" >
         </EditText>
+        <EditText
+            android:id="@+id/editCODICE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textcodice"
+            android:layout_marginTop="5dp"
 
+            android:ems="4"
+            android:inputType="text" >
+        </EditText>
         <EditText
             android:id="@+id/editTextForn"
             android:layout_width="wrap_content"
@@ -42,7 +51,14 @@
             android:layout_alignParentLeft="true"
             android:text="@string/MPnome"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
+        <TextView
+            android:id="@+id/textcodice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editTextName"
+            android:layout_toRightOf="@+id/editTextName"
+            android:text="COD."
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <Button
             android:id="@+id/button1"
             android:layout_width="wrap_content"

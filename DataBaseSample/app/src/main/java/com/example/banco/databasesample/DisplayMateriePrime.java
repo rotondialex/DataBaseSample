@@ -34,6 +34,11 @@ public class DisplayMateriePrime extends AppCompatActivity {
     TextView numforn;
     TextView ultimod;
     TextView ncas;
+    TextView codice,altriforn;
+    ListView obj2;
+    public ArrayList<String> array_AF;
+    public ArrayList<Integer> array_IDAF;
+    public String altrif;
     int id_To_Update = 0;
 
     @Override
@@ -49,6 +54,8 @@ public class DisplayMateriePrime extends AppCompatActivity {
         numforn=(TextView) findViewById(R.id.FornitoreSelez);
         ultimod=(TextView) findViewById(R.id.UltimaModifica);
         ncas=(TextView) findViewById(R.id.editNCas);
+        codice=(TextView) findViewById(R.id.editCODICE);
+        altriforn=(TextView) findViewById(R.id.altrifornitori);
 
         mydb = new DBHelper(this,"Hichem.db");
 
@@ -73,7 +80,43 @@ public class DisplayMateriePrime extends AppCompatActivity {
                 Cursor rs = mydb.getMateriaprima(Value);
                 id_To_Update = Value;
                 rs.moveToFirst();
+                altrif = rs.getString(rs.getColumnIndex(DBHelper.MP_COL_ALTRIFORN));
+                altriforn.setText(altrif);
+                array_AF = new ArrayList<String>();
+                array_IDAF = new ArrayList<Integer>();
+                if (!altrif.equals("0")) {
+                    String[] Fornit = altrif.split(",");
+                    Integer i;
+                    i = 0;
+                    Cursor rs2;
+                    String nomeforn;
+                    Integer idfornitore;
+                    while (i < Fornit.length) {
+                        rs2 = mydb.getData(Integer.parseInt(Fornit[i]));
+                        rs2.moveToFirst();
+                        nomeforn = rs2.getString(rs2.getColumnIndex(DBHelper.CONTACTS_COLUMN_NAME));
+                        idfornitore = rs2.getInt(rs2.getColumnIndex(DBHelper.CONTACTS_COLUMN_ID));
+                        array_AF.add(nomeforn);
+                        array_IDAF.add(idfornitore);
+                        i++;
+                    }
+                }
+                ArrayAdapter arrayAdapter2=new ArrayAdapter(this,R.layout.rowfornit, array_AF);
 
+                obj2 = (ListView)findViewById(R.id.potView1);
+                obj2.setAdapter(arrayAdapter2);
+                obj2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+                        // TODO Auto-generated method stub
+
+                        int id_To_Search = arg2;
+                       // TXfornsel.setText(array_AF.get(id_To_Search));
+                       // idfornsel.setText(String.valueOf(array_IDAF.get(id_To_Search)));
+
+
+                    }
+                });
                 String nam = rs.getString(rs.getColumnIndex(DBHelper.MP_COL_NOME));
                 Double prez = rs.getDouble(rs.getColumnIndex(DBHelper.MP_COL_PREZZO));
                 Double qua = rs.getDouble(rs.getColumnIndex(DBHelper.MP_COL_QUANTITA));
@@ -81,6 +124,7 @@ public class DisplayMateriePrime extends AppCompatActivity {
                 Integer fornit = rs.getInt(rs.getColumnIndex(DBHelper.MP_COL_FORN));
                 String ultmod = rs.getString(rs.getColumnIndex(DBHelper.MP_COL_ULTIMAMOD));
                 String ncastring = rs.getString(rs.getColumnIndex(DBHelper.MP_COL_CAS));
+                String CODstring = rs.getString(rs.getColumnIndex(DBHelper.MP_COL_CODICE));
 
 
                 if (!rs.isClosed())  {
@@ -100,6 +144,10 @@ public class DisplayMateriePrime extends AppCompatActivity {
                 ncas.setText(ncastring);
                 ncas.setFocusable(false);
                 ncas.setClickable(false);
+
+                codice.setText(CODstring);
+                codice.setFocusable(false);
+                codice.setClickable(false);
 
                 String tuaString = Double.toString(prez);
                 prezzo.setText(tuaString);
@@ -172,6 +220,10 @@ public class DisplayMateriePrime extends AppCompatActivity {
                 ncas.setFocusableInTouchMode(true);
                 ncas.setClickable(true);
 
+                codice.setEnabled(true);
+                codice.setFocusableInTouchMode(true);
+                codice.setClickable(true);
+
                 prezzo.setEnabled(true);
                 prezzo.setFocusableInTouchMode(true);
                 prezzo.setClickable(true);
@@ -217,12 +269,29 @@ public class DisplayMateriePrime extends AppCompatActivity {
                     startActivityForResult(i, 1);
 
                 }
+                return true;
+            case R.id.Potenziali_fornitori:
+
+
+                    Intent i = new Intent(this, PotenzialiFornitori.class);
+                    i.putExtra("materiaprima",id_To_Update);
+                    startActivity(i);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 
         }
     }
-
+    public void avviaRicercaMercato (View view){
+        Intent i = new Intent(this, Quantita.class);
+        i.putExtra("qualeattivita","Ricerca");
+        startActivityForResult(i, 1);
+    }
+    public void aggTogliForn (View view){
+        Intent i = new Intent(this, PotenzialiFornitori.class);
+        i.putExtra("materiaprima",id_To_Update);
+        startActivity(i);
+    }
     public void run(View view) {
         Bundle extras = getIntent().getExtras();
         if (numforn.getText().toString().isEmpty() || name.getText().toString().isEmpty()) {
@@ -251,7 +320,7 @@ public class DisplayMateriePrime extends AppCompatActivity {
 
                     if (mydb.updateMateriaprima(id_To_Update, name.getText().toString(),
                             Double.parseDouble(prezzo.getText().toString()), Double.parseDouble(quant.getText().toString()),
-                            Integer.parseInt(numforn.getText().toString()), "1", prezzo.getText().toString(), Double.parseDouble(quantmin.getText().toString()), ncas.getText().toString())) {
+                            Integer.parseInt(numforn.getText().toString()), "1", prezzo.getText().toString(), Double.parseDouble(quantmin.getText().toString()), ncas.getText().toString(),codice.getText().toString())) {
                         Toast.makeText(getApplicationContext(), "Aggiornato", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
@@ -261,7 +330,7 @@ public class DisplayMateriePrime extends AppCompatActivity {
                 } else {
                     if (mydb.insertMateriaPrima(name.getText().toString(),
                             Double.parseDouble(prezzo.getText().toString()), Double.parseDouble(quant.getText().toString()),
-                            Integer.parseInt(numforn.getText().toString()), "1", prezzo.getText().toString(), Double.parseDouble(quantmin.getText().toString()), ncas.getText().toString())) {
+                            Integer.parseInt(numforn.getText().toString()), "1", prezzo.getText().toString(), Double.parseDouble(quantmin.getText().toString()), ncas.getText().toString(),codice.getText().toString())) {
                         Toast.makeText(getApplicationContext(), "Aggiunto",
                                 Toast.LENGTH_SHORT).show();
                     } else {
@@ -335,27 +404,34 @@ public class DisplayMateriePrime extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Integer Fornit=Integer.parseInt(numforn.getText().toString());
+        String altrif=altriforn.getText().toString();
+        String []emailsAF;
+
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
                     DBtestiMail mails;
                     String inizio,fine;
+                    String emai;
                     Double result = data.getDoubleExtra("result", 0);
                     String unmis = data.getStringExtra("unmis");
+                    String chimichiama = data.getStringExtra("qualeattivita");
                     Integer intResult=(int)(result*1);
                     Cursor rs = mydb.getData(Fornit);
                     rs.moveToFirst();
-                    String emai = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_EMAIL));
+                    emai = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_EMAIL));
                     rs.close();
-                    // Istruisco Mail
-                mails=new DBtestiMail(this);
-                Cursor testiMail=mails.getAllMail();
-                testiMail.moveToFirst();
-                inizio=testiMail.getString(testiMail.getColumnIndex(DBtestiMail.TESTI_COL_INTEST));
-                fine=testiMail.getString(testiMail.getColumnIndex(DBtestiMail.TESTI_COL_FINE));
-                testiMail.close();
                     Intent intenzione = new Intent();
+                if (chimichiama.equals("Ordine")) {
+                    // Istruisco Mail
+                    mails = new DBtestiMail(this);
+                    Cursor testiMail = mails.getAllMail();
+                    testiMail.moveToFirst();
+                    inizio = testiMail.getString(testiMail.getColumnIndex(DBtestiMail.TESTI_COL_INTEST));
+                    fine = testiMail.getString(testiMail.getColumnIndex(DBtestiMail.TESTI_COL_FINE));
+                    testiMail.close();
+
                     intenzione.setAction(Intent.ACTION_SEND);
-                    intenzione.putExtra(Intent.EXTRA_EMAIL, new String[]{emai});
+                    intenzione.putExtra(Intent.EXTRA_EMAIL,new String[]{ emai});
                     intenzione.putExtra(Intent.EXTRA_SUBJECT, "Ordine");
                     intenzione.putExtra(Intent.EXTRA_TEXT, inizio +
                             "  - " + Integer.toString(intResult) + " " + unmis + " di " + name.getText().toString() + "\n\r" +
@@ -363,6 +439,47 @@ public class DisplayMateriePrime extends AppCompatActivity {
                             fine);
                     intenzione.setType("text/plain");
                     startActivity(intenzione);
+                }
+                if (chimichiama.equals("Ricerca")) {
+                    // Istruisco Mail
+                    if (!altrif.equals("0")) {
+                        String[] AFornit = altrif.split(",");
+                        emailsAF = new String[AFornit.length];
+                        Integer i;
+                        String Supporto;
+                        i = 0;
+                        emailsAF[i] =emai;
+                        i=i+1;
+                        Cursor rs2;
+                        while (i < AFornit.length) {
+                            rs2 = mydb.getData(Integer.parseInt(AFornit[i]));
+                            rs2.moveToFirst();
+                            emailsAF[i] = rs2.getString(rs2.getColumnIndex(DBHelper.CONTACTS_COLUMN_EMAIL));
+                            Supporto=emailsAF[i];
+                            i++;
+                        }
+
+                        mails = new DBtestiMail(this);
+                        Cursor testiMail = mails.getAllMail();
+                        testiMail.moveToFirst();
+                        testiMail.moveToNext();
+                        inizio = testiMail.getString(testiMail.getColumnIndex(DBtestiMail.TESTI_COL_INTEST));
+                        fine = testiMail.getString(testiMail.getColumnIndex(DBtestiMail.TESTI_COL_FINE));
+                        testiMail.close();
+
+                        intenzione.setAction(Intent.ACTION_SEND_MULTIPLE);
+                        intenzione.putExtra(Intent.EXTRA_EMAIL, new String[]{"jollyhichem@gmail.com"});
+                        intenzione.putExtra(Intent.EXTRA_BCC,emailsAF);
+                        intenzione.putExtra(Intent.EXTRA_SUBJECT, "Richiesta Quotazioni");
+                        intenzione.putExtra(Intent.EXTRA_TEXT, inizio +
+                                "  - " + Integer.toString(intResult) + " " + unmis + " di " + name.getText().toString() + "\n\r" +
+                                "\n\r" +
+                                fine);
+                        intenzione.setType("text/plain");
+                        startActivity(intenzione);
+                    }
+                }
+
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {

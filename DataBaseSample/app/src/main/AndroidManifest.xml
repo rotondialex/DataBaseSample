@@ -67,6 +67,7 @@
             android:parentActivityName=".DisplayFormule"/>
         <activity android:name="ImbQuant"
             android:parentActivityName=".DisplayConfezioni"/>
+        <activity android:name="PotenzialiFornitori" />
         <activity android:name="settings"
             android:parentActivityName=".MainActivity"/>
         <activity android:name="Produzione"
@@ -74,6 +75,8 @@
         <activity android:name="CostoConfezione"
             android:parentActivityName=".DisplayFormule"/>
         <activity android:name="TestoEmail"
+            android:parentActivityName=".settings"/>
+        <activity android:name="TestoEmailQuot"
             android:parentActivityName=".settings"/>
         <activity android:name="AndroidExplorer"/>
     </application>

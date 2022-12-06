@@ -58,7 +58,7 @@ public class DuplicaFormula extends AppCompatActivity {
         {
             Bundle Componenti=getIntent().getExtras();
             Integer newIdFRM;
-            newIdFRM=mydb.insertFormula(nuovoNome.getText().toString(),inventTRUEfalse.getText().toString(),Componenti);
+            newIdFRM=mydb.insertFormula(nuovoNome.getText().toString(),inventTRUEfalse.getText().toString(),Componenti,"");
             mydb.duplicaFormula(idfrm,newIdFRM);
             Intent intent = new Intent(this, Formule.class);
             intent.putExtra("Pino", "ciao");

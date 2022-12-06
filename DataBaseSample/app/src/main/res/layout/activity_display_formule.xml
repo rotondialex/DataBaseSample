@@ -30,9 +30,9 @@
             android:layout_height="wrap_content"
             android:onClick="run"
             android:text="SALVA"
-            android:layout_below="@+id/componenti"
-            android:layout_toRightOf="@+id/textView22"
-            android:layout_marginStart="25dp" />
+            android:layout_below="@+id/textView1"
+            android:layout_toRightOf="@+id/editTextName"
+            android:layout_marginStart="15dp" />
 
         <CheckBox
             android:text="Inventario"
@@ -63,6 +63,7 @@
             android:layout_marginTop="31dp"
             android:scrollbars="vertical"
             android:layout_alignParentStart="true"
+            android:background="@drawable/edittextbaxkground"
             />
 
         <TextView
@@ -72,6 +73,26 @@
             android:layout_below="@+id/editTextName"
             android:layout_marginTop="10dp"
             android:id="@+id/textView19" />
+        <TextView
+            android:text="Note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/componenti"
+            android:layout_marginTop="10dp"
+            android:id="@+id/labelnote" />
+        <EditText
+            android:id="@+id/editTestoNote"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/labelnote"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_alignParentLeft="true"
+            android:inputType="textMultiLine"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:background="@drawable/edittextbaxkground"
+            android:ems="8"
+            />
 
         <TextView
             android:text="Percentuale"
@@ -86,7 +107,7 @@
             android:text="Ultima Modifica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/componenti"
+            android:layout_below="@+id/editTestoNote"
             android:layout_toRightOf="@+id/textView23"
             android:layout_marginLeft="13dp"
             android:layout_marginTop="13dp"
@@ -103,7 +124,7 @@
             android:text="Costo Al Litro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/componenti"
+            android:layout_below="@+id/editTestoNote"
             android:layout_alignLeft="@+id/componenti"
             android:layout_marginTop="13dp"
             android:id="@+id/textView23" />

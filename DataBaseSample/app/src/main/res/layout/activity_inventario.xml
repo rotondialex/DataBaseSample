@@ -54,6 +54,15 @@
         android:layout_below="@+id/checkBoxPrezzi"
         android:layout_marginStart="16dp"
         android:layout_marginTop="11dp" />
+    <Button
+        android:text="Azzera quantità"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="azzeraQuant"
+        android:id="@+id/buttonazzera"
+        android:layout_below="@+id/buttonCostiProd"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp" />
 
 </RelativeLayout>
 

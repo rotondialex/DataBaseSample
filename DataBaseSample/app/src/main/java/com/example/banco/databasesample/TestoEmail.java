@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class TestoEmail extends AppCompatActivity {
     TextView quan;
     TextView unmis;
+    TextView tipoMail;
     EditText inizio, fine;
     String testoInizio,testoFine;
     DBtestiMail testimail;
@@ -40,6 +41,8 @@ public class TestoEmail extends AppCompatActivity {
         setContentView(R.layout.activity_testo_email);
         inizio=(EditText)findViewById(R.id.editTestoInizio);
         fine=(EditText)findViewById(R.id.editTestoFine);
+        tipoMail=(TextView) findViewById(R.id.textView);
+        tipoMail.setText("Mail Ordini a Fornitore");
         inizio.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override

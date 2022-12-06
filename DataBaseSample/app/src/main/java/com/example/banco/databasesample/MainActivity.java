@@ -41,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
             "disseminate it.\n\nIf you are not the address(es), to the senses of D.Lgs. GDPR. 2016/679, we inform "+
             "you that any copying or dissemination is strictly forbidden; please, erase this message and contact "+
             "immediately the sender: hichem@detergenti.info";
+    public final static String INTEST_QUOTAZ = "Buongiorno,\ncon la presente siamo a richiedervi Vs migliore quotazione"+
+            " per quanto segue:\n\n";
+    public final static String FINE_QUOTAZ = "Cordiali saluti\nRotondi Alessandro\nHichem srl\n\n"+
+            "Hichem srl - Via Risorgimento, 34 - 20030 Senago\nLe informazioni contenute in questo messaggio"+
+            "sono da considerarsi strettamente riservate e confidenziali, dirette esclusivamente al destinatario"+
+            "indicato, unico soggetto autorizzato alla lettura, alla copiatura e, sotto la propria responsabilità, "+
+            "alla diffusione.\n\nQualora non foste i destinatari, ai sensi del GDPR. 2016/679 Vi informiamo che è "+
+            "assolutamente vietata qualsiasi forma di riproduzione o diffusione; siete pregati di eliminare il "+
+            "messaggio, inviando gentilmente comunicazione al seguente indirizzo: hichem@detergenti.info\n\nThe "+
+            "information contained in this message is strictly privileged and confidential and is only destined to "+
+            "the addressee(s) identified above, the only one who can read, copy and, under his responsibility, "+
+            "disseminate it.\n\nIf you are not the address(es), to the senses of D.Lgs. GDPR. 2016/679, we inform "+
+            "you that any copying or dissemination is strictly forbidden; please, erase this message and contact "+
+            "immediately the sender: hichem@detergenti.info";
     Button backup;
     DBHelper mydb;
     DBtestiMail testimail;
@@ -59,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
         mail.moveToFirst();
         if (mail.isAfterLast()){
            testimail.insertMail("Ordini Fornitori",INTEST_ORDINI,"",FINE_ORDINI,"","","");
+           testimail.insertMail("Quotazioni Fornitori",INTEST_QUOTAZ,"",FINE_QUOTAZ,"","","");
         }
+
         mail.close();
         int permsRequestCode = 200;
         if (shouldAskPermission()) {

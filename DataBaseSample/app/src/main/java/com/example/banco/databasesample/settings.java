@@ -172,6 +172,21 @@ public class settings extends AppCompatActivity {
 
         startActivity(intent);
     }
+    public void VaiAmailQuot (View view){
+
+        Intent intent = new Intent(this, TestoEmailQuot.class);
+
+        startActivity(intent);
+    }
+    public void CancAF (View view){
+        Integer i;
+        array_ID = mydb.getAllMPID();
+        i=0;
+        while (i<array_ID.size()){
+            mydb.updateAltriforn(array_ID.get(i),"0");
+            i++;
+        }
+    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == 1) {

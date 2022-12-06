@@ -16,6 +16,7 @@
     <string name="country">Agente</string>
     <string name="save">Aggiungi</string>
     <string name="deleteContact">Sei sicuro di eliminare?</string>
+    <string name="azzQuant">Sei sicuro di azzerare quantità?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="MPnome">Prodotto</string>
@@ -28,4 +29,8 @@
     <string name="ModQuant">Modifica Quantità</string>
     <string name="ElimConf">Elimina Confezione</string>
     <string name="input_placeholder">Write a message</string>
+    <string name="pot_forn">Potenziali fornitori</string>
+    <string name="freccegiu">↓↓↓</string>
+    <string name="freccesu">↑↑↑</string>
+
 </resources>

@@ -21,7 +21,17 @@
             android:layout_alignParentLeft="true"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="82dp"
-            android:ems="10"
+            android:ems="8"
+            android:inputType="text" >
+        </EditText>
+        <EditText
+            android:id="@+id/editCODICE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textcodice"
+            android:layout_marginTop="5dp"
+
+            android:ems="4"
             android:inputType="text" >
         </EditText>
 
@@ -43,6 +53,14 @@
             android:text="@string/MPnome"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
+        <TextView
+            android:id="@+id/textcodice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editTextName"
+            android:layout_toRightOf="@+id/editTextName"
+            android:text="COD."
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <Button
             android:id="@+id/button1"
             android:layout_width="wrap_content"
@@ -179,6 +197,64 @@
             android:layout_below="@+id/editTextName"
             android:layout_toEndOf="@+id/textView17"
             android:id="@+id/editNCas" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testoaltrif"
+            android:layout_below="@+id/LisForn"
+            android:layout_alignParentStart="true"
+            android:textSize="26dp"
+            android:layout_marginTop="5dp"
+            android:text="Altri Fornitori" />
 
+
+        <ListView
+            android:id="@+id/potView1"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/testoaltrif"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"
+            android:dividerHeight="3dp"></ListView>
+        <Button
+            android:text="Aggiungi/rimuovi"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/butAggTogli"
+            android:layout_marginLeft="8dp"
+            android:textSize="10dp"
+            android:layout_below="@+id/testoaltrif"
+            android:layout_toRightOf="@id/potView1"
+            android:layout_marginTop="25dp"
+
+            android:onClick="aggTogliForn"
+            />
+        <Button
+            android:text="Ricerca di Mercato"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/butRicerca"
+            android:layout_marginLeft="8dp"
+            android:textSize="10dp"
+            android:layout_below="@+id/butAggTogli"
+            android:layout_toRightOf="@id/potView1"
+            android:layout_marginTop="25dp"
+
+            android:onClick="avviaRicercaMercato"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/altrifornitori"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/IDfornsel"
+            />
     </RelativeLayout>
 </ScrollView>

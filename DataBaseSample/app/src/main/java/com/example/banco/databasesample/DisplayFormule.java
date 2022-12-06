@@ -36,6 +36,7 @@ public class DisplayFormule extends AppCompatActivity {
     CheckBox inv;
     TextView ultimod;
     TextView costolitro;
+    TextView Note;
     TextView email;
     TextView street;
     TextView place;
@@ -57,6 +58,7 @@ public class DisplayFormule extends AppCompatActivity {
         inv = (CheckBox) findViewById(R.id.inventario);
         ultimod = (TextView) findViewById(R.id.UltimaModifica);
         costolitro = (TextView) findViewById(R.id.CostoLitro);
+        Note = (TextView) findViewById(R.id.editTestoNote);
 
         mydb = new DBHelper(this,"Hichem.db");
 
@@ -73,6 +75,7 @@ public class DisplayFormule extends AppCompatActivity {
                 String nam = rs.getString(rs.getColumnIndex(DBHelper.FORM_COL_NAME));
                 String invent=rs.getString(rs.getColumnIndex(DBHelper.FORM_COL_INV));
                 String ultmod = rs.getString(rs.getColumnIndex(DBHelper.FORM_COL_ULTIMAMOD));
+                String note = rs.getString(rs.getColumnIndex(DBHelper.FORM_COL_CAMPO1));
 
                 if (!rs.isClosed())  {
                     rs.close();
@@ -83,6 +86,9 @@ public class DisplayFormule extends AppCompatActivity {
                 name.setText((CharSequence)nam);
                 name.setFocusable(false);
                 name.setClickable(false);
+                Note.setText((CharSequence)note);
+                Note.setFocusable(false);
+                Note.setClickable(false);
 
                 inv.setChecked(Boolean.parseBoolean(invent));
                 inv.setFocusable(false);
@@ -283,7 +289,7 @@ public class DisplayFormule extends AppCompatActivity {
                             Bundle Componenti= getIntent().getExtras();// TODO
                             String inventSIno=String.valueOf(inv.isChecked());
                             mydb.deleteComponente(id_To_Update,idcomponente);
-                            mydb.updateFormula(id_To_Update,name.getText().toString(),inventSIno,Componenti);
+                            mydb.updateFormula(id_To_Update,name.getText().toString(),inventSIno,Componenti,Note.getText().toString());
                             Toast.makeText(getApplicationContext(), "Cancellazione Avvenuta",
                                     Toast.LENGTH_SHORT).show();
                             Bundle dataBundle = new Bundle();
@@ -342,7 +348,7 @@ public class DisplayFormule extends AppCompatActivity {
                             Bundle Componenti= getIntent().getExtras();// TODO
                             String inventSIno=String.valueOf(inv.isChecked());
                             mydb.deleteConfdiFRM(id_To_Update,idcomponente);
-                            mydb.updateFormula(id_To_Update,name.getText().toString(),inventSIno,Componenti);
+                            mydb.updateFormula(id_To_Update,name.getText().toString(),inventSIno,Componenti,Note.getText().toString());
                             Toast.makeText(getApplicationContext(), "Cancellazione Avvenuta",
                                     Toast.LENGTH_SHORT).show();
                             Bundle dataBundle = new Bundle();
@@ -399,6 +405,9 @@ public class DisplayFormule extends AppCompatActivity {
                 name.setEnabled(true);
                 name.setFocusableInTouchMode(true);
                 name.setClickable(true);
+                Note.setEnabled(true);
+                Note.setFocusableInTouchMode(true);
+                Note.setClickable(true);
 
                 inv.setEnabled(true);
                 inv.setFocusableInTouchMode(true);
@@ -464,7 +473,7 @@ public class DisplayFormule extends AppCompatActivity {
             int Value = extras.getInt("idfrm");
             String inventSIno=String.valueOf(inv.isChecked());
             if(Value>0){
-                if(mydb.updateFormula(id_To_Update,name.getText().toString(),inventSIno,Componenti)){
+                if(mydb.updateFormula(id_To_Update,name.getText().toString(),inventSIno,Componenti,Note.getText().toString())){
                     Toast.makeText(getApplicationContext(), "Aggiornato", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
@@ -472,7 +481,7 @@ public class DisplayFormule extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Non Aggiornato", Toast.LENGTH_SHORT).show();
                 }
             } else{
-                id_To_Update=mydb.insertFormula(name.getText().toString(),inventSIno,Componenti);
+                id_To_Update=mydb.insertFormula(name.getText().toString(),inventSIno,Componenti,Note.getText().toString());
                     Toast.makeText(getApplicationContext(), "Aggiunto",
                             Toast.LENGTH_SHORT).show();
 

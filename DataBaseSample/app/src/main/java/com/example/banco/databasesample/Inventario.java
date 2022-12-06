@@ -322,11 +322,12 @@ public class Inventario extends AppCompatActivity {
                 r=array_ID_MP.get(i);
                 Cursor rs=mydb.getMateriaprima(r);
                 rs.moveToFirst();
+                String codice=rs.getString(rs.getColumnIndex(DBHelper.MP_COL_CODICE));
                 Double qua = rs.getDouble(rs.getColumnIndex(DBHelper.MP_COL_QUANTITA));
                 Double prez=rs.getDouble(rs.getColumnIndex(DBHelper.MP_COL_PREZZO));
                 rs.close();
                 siQuant=siNOquant.isChecked();
-                riga=ListMatPrime[i];
+                riga=codice+";"+ListMatPrime[i];
                 if (siQuant) {
                     riga=riga+";" +qua.toString();
                     if (siPrezzo){
@@ -363,10 +364,11 @@ public class Inventario extends AppCompatActivity {
                 r=array_ID_IMB.get(i);
                 Cursor rs=mydb.getImballaggio(r);
                 rs.moveToFirst();
+                String codiceIMB=rs.getString(rs.getColumnIndex(DBHelper.IMB_COL_CODICE));
                 Double qua = rs.getDouble(rs.getColumnIndex(DBHelper.IMB_COL_QUANTITA));
                 Double prez = rs.getDouble(rs.getColumnIndex(DBHelper.IMB_COL_PREZZO));
                 rs.close();
-                riga=ListImb[i];
+                riga=codiceIMB+";"+ListImb[i];
                 if (siQuant) {
                     riga=riga+";" +qua.toString();
                     if (siPrezzo){
@@ -452,6 +454,29 @@ public class Inventario extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
         }
 
+    }
+    public void azzeraQuant (View view){
+        mydb = new DBHelper(this, "Hichem.db");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.azzQuant)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mydb.azzeraInventario();
+                        Toast.makeText(getApplicationContext(), "Cancellazione avvenuta",
+                                Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),Inventario.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+
+        AlertDialog d = builder.create();
+        d.setTitle("Conferma");
+        d.show();
     }
     public void valorizzaInventario (View view){
 

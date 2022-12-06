@@ -39,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String MP_COL_LIVELLOMIN="livellominmp";
     public static final String MP_COL_ULTIMAMOD="ultimamodifica";
     public static final String MP_COL_CAS="cas";
-    public static final String MP_COL_CAMPO1="campo1";
+    public static final String MP_COL_CODICE="campo1";
     public static final String MP_COL_CAMPO2="campo2";
     public static final String IMB_TABLE_NAME="Imballaggi";
     public static final String IMB_COL_ID="idimb";
@@ -48,7 +48,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String IMB_COL_QUANTITA="quantimb";
     public static final String IMB_COL_FORN="fornimb";
     public static final String IMB_COL_ULTIMAMOD="ultimamodifica";
-    public static final String IMB_COL_CAMPO1="campo1";
+    public static final String IMB_COL_CODICE="campo1";
     public static final String IMB_COL_CAMPO2="campo2";
 
     public static final String FORM_TABLE_NAME="Formule";
@@ -90,6 +90,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CONFDIFRM2_COL_IDCONF="idforn";
     public static final String CONFDIFRM2_COL_QUANT="prezzo";
     public static final String CONFDIFRM2_COL_ULTIMAMOD="ultimamodifica";
+
+    public static final String ORDINIFORN_TABLE_NAME="Ordinifornitori";
+    public static final String ORDINIFORN_COL_ID="idOrdForn";
+    public static final String ORDINIFORN_COL_IDFORN="idForn";
+    public static final String ORDINIFORN_COL_DATA="dataOrdine";
+    public static final String ORDINIFORN_COL_TESTO="testoOrdine";
+    public static final String ORDINIFORN_COL_CAMPO1="campo1";
+    public static final String ORDINIFORN_COL_CAMPO2="campo2";
+
+
 
     private HashMap hp;
 
@@ -158,6 +168,15 @@ public class DBHelper extends SQLiteOpenHelper {
                         CONFDIFRM2_COL_QUANT+" double, "+
                         CONFDIFRM2_COL_ULTIMAMOD+" text)"
         );
+        db.execSQL(
+                "create table "+ORDINIFORN_TABLE_NAME+" " + "("+
+                        ORDINIFORN_COL_ID+" integer , "+
+                        ORDINIFORN_COL_IDFORN+" integer, "+
+                        ORDINIFORN_COL_DATA+" text, "+
+                        ORDINIFORN_COL_TESTO+" text, "+
+                        ORDINIFORN_COL_CAMPO1+" text, "+
+                        ORDINIFORN_COL_CAMPO2+" text)"
+        );
     }
 
     @Override
@@ -172,6 +191,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+IMBINCONF_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+CONFDIFRM_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+CONFDIFRM2_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ORDINIFORN_TABLE_NAME);
         onCreate(db);
     }
     public boolean insertComponente(Integer idfrm, Integer idmpr, Double percent) {
@@ -212,7 +232,7 @@ public class DBHelper extends SQLiteOpenHelper {
         percorso=db.getPath();
         return percorso;
     }
-    public Integer insertFormula(String name, String inventario, Bundle componenti) {
+    public Integer insertFormula(String name, String inventario, Bundle componenti, String note) {
         Integer newintid;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -221,7 +241,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Calendar today= Calendar.getInstance();
         String oggi= DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY).format(today.getTime());
         contentValues.put(FORM_COL_ULTIMAMOD, oggi);
-        contentValues.put(FORM_COL_CAMPO1, " ");
+        contentValues.put(FORM_COL_CAMPO1, note);
         contentValues.put(FORM_COL_CAMPO2, " ");
         Long newid= db.insert(FORM_TABLE_NAME, null, contentValues);
         newintid=newid.intValue();
@@ -243,26 +263,26 @@ public class DBHelper extends SQLiteOpenHelper {
         newintid=newid.intValue();
         return newintid;
     }
-    public boolean insertMateriaPrima(String name, Double prezzo, Double quant, Integer forn,String altriforn,String altriprezzi,Double livellominmp, String cas) {
+    public boolean insertMateriaPrima(String name, Double prezzo, Double quant, Integer forn,String altriforn,String altriprezzi,Double livellominmp, String cas, String codice) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(MP_COL_NOME, name);
         contentValues.put(MP_COL_PREZZO, prezzo);
         contentValues.put(MP_COL_QUANTITA, quant);
         contentValues.put(MP_COL_FORN, forn);
-        contentValues.put(MP_COL_ALTRIFORN, altriforn);
+        contentValues.put(MP_COL_ALTRIFORN, "0");
         contentValues.put(MP_COL_ALTRIPREZZI, altriprezzi);
         contentValues.put(MP_COL_LIVELLOMIN, livellominmp);
         Calendar today= Calendar.getInstance();
         String oggi= DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY).format(today.getTime());
         contentValues.put(MP_COL_ULTIMAMOD, oggi);
         contentValues.put(MP_COL_CAS, cas);
-        contentValues.put(MP_COL_CAMPO1, " ");
+        contentValues.put(MP_COL_CODICE, codice);
         contentValues.put(MP_COL_CAMPO2, " ");
         db.insert(MP_TABLE_NAME, null, contentValues);
         return true;
     }
-    public boolean insertImballaggio(String name, Double prezzo, Double quant, Integer forn) {
+    public boolean insertImballaggio(String name, Double prezzo, Double quant, Integer forn, String codice) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(IMB_COL_NOME, name);
@@ -272,7 +292,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Calendar today= Calendar.getInstance();
         String oggi= DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY).format(today.getTime());
         contentValues.put(IMB_COL_ULTIMAMOD, oggi);
-        contentValues.put(IMB_COL_CAMPO1, " ");
+        contentValues.put(IMB_COL_CODICE, codice);
         contentValues.put(IMB_COL_CAMPO2, " ");
         db.insert(IMB_TABLE_NAME, null, contentValues);
         return true;
@@ -463,7 +483,7 @@ public class DBHelper extends SQLiteOpenHelper {
         int numRows = (int) DatabaseUtils.queryNumEntries(db, CONTACTS_TABLE_NAME);
         return numRows;
     }
-    public boolean updateFormula (Integer id,String name,String inventario, Bundle Componenti) {
+    public boolean updateFormula (Integer id,String name,String inventario, Bundle Componenti, String note) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(FORM_COL_NAME, name);
@@ -471,7 +491,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Calendar today= Calendar.getInstance();
         String oggi= DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY).format(today.getTime());
         contentValues.put(FORM_COL_ULTIMAMOD, oggi);
-        contentValues.put(FORM_COL_CAMPO1, " ");
+        contentValues.put(FORM_COL_CAMPO1,note);
         contentValues.put(FORM_COL_CAMPO2, " ");
         db.update(FORM_TABLE_NAME, contentValues, "idfrm = ? ", new String[] { Integer.toString(id) } );
         return true;
@@ -509,26 +529,35 @@ public class DBHelper extends SQLiteOpenHelper {
         db.update(CONF_TABLE_NAME, contentValues, "idconf = ? ", new String[] { Integer.toString(id) } );
         return true;
     }
-    public boolean updateMateriaprima (Integer id,String name, Double prezzo, Double quant, Integer forn,String altriforn,String altriprezzi,Double livellominmp, String cas) {
+    public boolean updateMateriaprima (Integer id,String name, Double prezzo, Double quant, Integer forn,String altriforn,String altriprezzi,Double livellominmp, String cas, String codice) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(MP_COL_NOME, name);
         contentValues.put(MP_COL_PREZZO, prezzo);
         contentValues.put(MP_COL_QUANTITA, quant);
         contentValues.put(MP_COL_FORN, forn);
-        contentValues.put(MP_COL_ALTRIFORN, altriforn);
         contentValues.put(MP_COL_ALTRIPREZZI, altriprezzi);
         contentValues.put(MP_COL_LIVELLOMIN, livellominmp);
         Calendar today= Calendar.getInstance();
         String oggi= DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY).format(today.getTime());
         contentValues.put(MP_COL_ULTIMAMOD, oggi);
         contentValues.put(MP_COL_CAS, cas);
-        contentValues.put(MP_COL_CAMPO1, " ");
+        contentValues.put(MP_COL_CODICE, codice);
         contentValues.put(MP_COL_CAMPO2, " ");
         db.update(MP_TABLE_NAME, contentValues, "idmp = ? ", new String[] { Integer.toString(id) } );
         return true;
     }
-    public boolean updateImballaggio (Integer id,String name, Double prezzo, Double quant, Integer forn) {
+    public boolean updateAltriforn (Integer id,String altriforn) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(MP_COL_ALTRIFORN, altriforn);
+
+
+        db.update(MP_TABLE_NAME, contentValues, "idmp = ? ", new String[] { Integer.toString(id) } );
+        return true;
+    }
+    public boolean updateImballaggio (Integer id,String name, Double prezzo, Double quant, Integer forn, String codice) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(IMB_COL_NOME, name);
@@ -538,7 +567,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Calendar today= Calendar.getInstance();
         String oggi= DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY).format(today.getTime());
         contentValues.put(IMB_COL_ULTIMAMOD, oggi);
-        contentValues.put(IMB_COL_CAMPO1, " ");
+        contentValues.put(IMB_COL_CODICE, codice);
         contentValues.put(IMB_COL_CAMPO2, " ");
         db.update(IMB_TABLE_NAME, contentValues, "idimb = ? ", new String[] { Integer.toString(id) } );
         return true;
@@ -985,6 +1014,49 @@ public class DBHelper extends SQLiteOpenHelper {
             res.moveToNext();
         }
         return array_list;
+    }
+    public Boolean azzeraInventario (){
+        //materie prime
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Materieprime", null );
+        res.moveToFirst();
+        Integer iddamodif;
+        ContentValues contentValues;
+        while(res.isAfterLast() == false){
+            iddamodif=res.getInt(res.getColumnIndex(MP_COL_ID));
+            contentValues = new ContentValues();
+            contentValues.put(MP_COL_QUANTITA, 0);
+
+            db.update(MP_TABLE_NAME, contentValues, MP_COL_ID+" = ? ", new String[] { Integer.toString(iddamodif) } );
+            res.moveToNext();
+        }
+
+        //imballaggi
+        res =  db.rawQuery( "select * from Imballaggi", null );
+        res.moveToFirst();
+        while(res.isAfterLast() == false){
+            iddamodif=res.getInt(res.getColumnIndex(IMB_COL_ID));
+            contentValues = new ContentValues();
+            contentValues.put(IMB_COL_QUANTITA, 0);
+
+            db.update(IMB_TABLE_NAME, contentValues, IMB_COL_ID+" = ? ", new String[] { Integer.toString(iddamodif) } );
+            res.moveToNext();
+        }
+
+        //CONFEZIONi
+        res =  db.rawQuery( "select * from "+CONFDIFRM2_TABLE_NAME, null );
+        res.moveToFirst();
+        Integer idconfdamod;
+        while(res.isAfterLast() == false){
+            iddamodif=res.getInt(res.getColumnIndex(CONFDIFRM2_COL_IDFRM));
+            idconfdamod=res.getInt(res.getColumnIndex(CONFDIFRM2_COL_IDCONF));
+            contentValues = new ContentValues();
+            contentValues.put(CONFDIFRM2_COL_QUANT, 0);
+
+            db.update(CONFDIFRM2_TABLE_NAME, contentValues, CONFDIFRM2_COL_IDFRM+" = ? AND "+CONFDIFRM2_COL_IDCONF +"= ? ", new String[] { Integer.toString(iddamodif),Integer.toString(idconfdamod) } );
+            res.moveToNext();
+        }
+        return true;
     }
 
 }
