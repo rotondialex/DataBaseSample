@@ -972,6 +972,59 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return array_list;
     }
+    public ArrayList<String> getAllOrdini() {
+        ArrayList<String> array_list = new ArrayList<String>();
+        Integer idforn;
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME, null );
+        res.moveToFirst();
+        Cursor res2 =  db.rawQuery( "select * from "+CONTACTS_TABLE_NAME, null );
+        res2.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            idforn=res.getInt(res.getColumnIndex(ORDINIFORN_COL_ID));
+            boolean trovato=false;
+            while (trovato==false) {
+                if (idforn==res2.getInt(res2.getColumnIndex(CONTACTS_COLUMN_ID))){
+                    array_list.add(res2.getString(res2.getColumnIndex(CONTACTS_COLUMN_NAME)));
+                    trovato=true;
+                }
+                res2.moveToNext();
+            }
+
+            res.moveToNext();
+        }
+        return array_list;
+    }
+    public ArrayList<Integer> getAllID_Ordini() {
+        ArrayList<Integer> array_list = new ArrayList<Integer>();
+
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME, null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            array_list.add(res.getInt(res.getColumnIndex(ORDINIFORN_COL_ID)));
+            res.moveToNext();
+        }
+        return array_list;
+    }
+    public ArrayList<String> getAlldate_Ordini() {
+        ArrayList<String> array_list = new ArrayList<String>();
+
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME, null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            array_list.add(res.getString(res.getColumnIndex(ORDINIFORN_COL_DATA)));
+            res.moveToNext();
+        }
+        return array_list;
+    }
     public ArrayList<String> getAllImballaggi() {
         ArrayList<String> array_list = new ArrayList<String>();
 

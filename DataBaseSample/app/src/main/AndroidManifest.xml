@@ -29,6 +29,8 @@
 
         <activity android:name="DisplayContact"
             android:parentActivityName=".Fornitori"/>
+        <activity android:name="Ordini"
+            android:parentActivityName=".Fornitori"/>
         <activity android:name="DisplayConfezioni"
             android:label="DisplayConfezioni"
             android:parentActivityName=".Confezioni"/>
@@ -49,8 +51,6 @@
         <activity android:name="Inventario"
             android:parentActivityName=".MainActivity"/>
         <activity android:name="Confezioni"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name="ChatMain"
             android:parentActivityName=".MainActivity"/>
         <activity android:name="MateriePrime"
             android:parentActivityName=".MainActivity"/>

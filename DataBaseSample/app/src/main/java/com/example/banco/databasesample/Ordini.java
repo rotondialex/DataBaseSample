@@ -5,34 +5,27 @@ package com.example.banco.databasesample;
  */
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static android.view.KeyEvent.ACTION_UP;
-
-public class Fornitori extends AppCompatActivity {
+public class Ordini extends AppCompatActivity {
     public final static String SELEZFORN = "SELEZFORN";
     private ListView obj;
     public ArrayList<String> array_list;
+    public ArrayList<String> array_listDATA;
     public ArrayList<Integer> array_ID;
     private ArrayAdapter arrayAdapter;
     DBHelper mydb;
@@ -41,12 +34,13 @@ public class Fornitori extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fornitori);
+        setContentView(R.layout.activity_ordini);
         getSupportActionBar().setHomeButtonEnabled(true);
         cerca = (EditText) findViewById(R.id.editCerca);
 
         mydb = new DBHelper(this,"Hichem.db");
-        array_list = mydb.getAllCotacts();
+        array_list = mydb.getAllOrdini();
+        array_listDATA = mydb.getAlldate_Ordini();
         array_ID = mydb.getAllID();
 
         // Ordino Alfabeticamente

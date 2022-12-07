@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     public final static String INTEST_ORDINI = "Buongiorno,\ncon la presente siamo a richiedervi fornitura"+
             " per quanto segue:\n\n";
     public final static String FINE_ORDINI = "Cordiali saluti\nRotondi Alessandro\nHichem srl\n\n"+
-            "Hichem srl - Via Risorgimento, 34 - 20030 Senago\nLe informazioni contenute in questo messaggio"+
-            "sono da considerarsi strettamente riservate e confidenziali, dirette esclusivamente al destinatario"+
+            "Hichem srl - Via Risorgimento, 34 - 20030 Senago\nLe informazioni contenute in questo messaggio "+
+            "sono da considerarsi strettamente riservate e confidenziali, dirette esclusivamente al destinatario "+
             "indicato, unico soggetto autorizzato alla lettura, alla copiatura e, sotto la propria responsabilità, "+
             "alla diffusione.\n\nQualora non foste i destinatari, ai sensi del GDPR. 2016/679 Vi informiamo che è "+
             "assolutamente vietata qualsiasi forma di riproduzione o diffusione; siete pregati di eliminare il "+
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
     public final static String INTEST_QUOTAZ = "Buongiorno,\ncon la presente siamo a richiedervi Vs migliore quotazione"+
             " per quanto segue:\n\n";
     public final static String FINE_QUOTAZ = "Cordiali saluti\nRotondi Alessandro\nHichem srl\n\n"+
-            "Hichem srl - Via Risorgimento, 34 - 20030 Senago\nLe informazioni contenute in questo messaggio"+
-            "sono da considerarsi strettamente riservate e confidenziali, dirette esclusivamente al destinatario"+
+            "Hichem srl - Via Risorgimento, 34 - 20030 Senago\nLe informazioni contenute in questo messaggio "+
+            "sono da considerarsi strettamente riservate e confidenziali, dirette esclusivamente al destinatario "+
             "indicato, unico soggetto autorizzato alla lettura, alla copiatura e, sotto la propria responsabilità, "+
             "alla diffusione.\n\nQualora non foste i destinatari, ai sensi del GDPR. 2016/679 Vi informiamo che è "+
             "assolutamente vietata qualsiasi forma di riproduzione o diffusione; siete pregati di eliminare il "+
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         mydb = new DBHelper(this,"Hichem.db");
         testimail= new DBtestiMail(this);
 
-        String[] nameproducts = new String[]{"Anagrafica Fornitori", "Materie Prime", "Imballaggi", "Formule", "Confezioni","Inventario e costi","Impostazioni", "Esci"};
+        String[] nameproducts = new String[]{"Fornitori", "Materie Prime", "Imballaggi", "Formule", "Confezioni","Inventario e costi","Impostazioni", "Esci"};
         String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE"};
         Cursor mail=testimail.getAllMail();
         mail.moveToFirst();
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Toast.makeText(getApplicationContext(), titoloriga, Toast.LENGTH_SHORT).show();
 
-                if (titoloriga == "Anagrafica Fornitori") {
+                if (titoloriga == "Fornitori") {
                     FORNselected();
                 }
                 if (titoloriga == "Materie Prime") {
