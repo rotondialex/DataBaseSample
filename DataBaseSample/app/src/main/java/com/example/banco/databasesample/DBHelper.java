@@ -170,7 +170,7 @@ public class DBHelper extends SQLiteOpenHelper {
         );
         db.execSQL(
                 "create table "+ORDINIFORN_TABLE_NAME+" " + "("+
-                        ORDINIFORN_COL_ID+" integer , "+
+                        ORDINIFORN_COL_ID+" integer primary key, "+
                         ORDINIFORN_COL_IDFORN+" integer, "+
                         ORDINIFORN_COL_DATA+" text, "+
                         ORDINIFORN_COL_TESTO+" text, "+
@@ -306,6 +306,17 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("indirizzo", street);
         contentValues.put("agente", place);
         db.insert("Fornitori", null, contentValues);
+        return true;
+    }
+    public boolean insertOrdine (String testo, Integer Idforn, String data, String campo1,String campo2) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ORDINIFORN_COL_TESTO, testo);
+        contentValues.put(ORDINIFORN_COL_IDFORN, Idforn);
+        contentValues.put(ORDINIFORN_COL_DATA, data);
+        contentValues.put(ORDINIFORN_COL_CAMPO1, campo1);
+        contentValues.put(ORDINIFORN_COL_CAMPO2, campo2);
+        db.insert(ORDINIFORN_TABLE_NAME, null, contentValues);
         return true;
     }
     public Cursor getData(int id) {
@@ -765,6 +776,34 @@ public class DBHelper extends SQLiteOpenHelper {
 
         while(res.isAfterLast() == false){
             array_list.add(res.getInt(res.getColumnIndex(CONTACTS_COLUMN_ID)));
+            res.moveToNext();
+        }
+        return array_list;
+    }
+    public ArrayList<String> getAllOrdiniDaCerca(String DaTrovare) {
+        ArrayList<String> array_list = new ArrayList<String>();
+
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME+" where "+ORDINIFORN_COL_TESTO+" LIKE '%"+DaTrovare+"%'", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            array_list.add(res.getString(res.getColumnIndex(ORDINIFORN_COL_TESTO)));
+            res.moveToNext();
+        }
+        return array_list;
+    }
+    public ArrayList<Integer> getAllOrdiniIDdaCerca(String DaTrovare) {
+        ArrayList<Integer> array_list = new ArrayList<Integer>();
+
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME+" where "+CONTACTS_COLUMN_NAME+" LIKE "+"'%"+DaTrovare+"%'", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            array_list.add(res.getInt(res.getColumnIndex(ORDINIFORN_COL_ID)));
             res.moveToNext();
         }
         return array_list;

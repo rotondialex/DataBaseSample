@@ -72,8 +72,8 @@ public class Ordini extends AppCompatActivity {
         cerca.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 String testo = cerca.getText().toString();
-                array_list = mydb.getAllContactsDaCerca(testo);
-                array_ID = mydb.getAllContactsIDdaCerca(testo);
+                array_list = mydb.getAllOrdiniDaCerca(testo);
+                array_ID = mydb.getAllOrdiniIDdaCerca(testo);
                 // Ordino Alfabeticamente
                 String Supporto;
                 Integer r,x,Supp;
@@ -145,7 +145,7 @@ public class Ordini extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item){
         super.onOptionsItemSelected(item);
 
@@ -169,7 +169,7 @@ public class Ordini extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
 
 }
