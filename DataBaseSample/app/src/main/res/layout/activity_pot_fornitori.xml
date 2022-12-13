@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".PotenzialiFornitori">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextCerca"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/listView1"
+        android:text="Cerca>"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" >
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="26dp"
+        android:text="Fornitori" />
+
+    <EditText
+        android:id="@+id/editCerca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_alignBaseline="@+id/TextCerca"
+        android:layout_alignBottom="@+id/TextCerca"
+        android:layout_marginTop="12dp"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_below="@+id/TextCerca"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        >
+
+        <requestFocus />
+    </ListView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/testoView3"
+        android:layout_below="@+id/listView1"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"
+        android:textSize="20dp"
+        android:text="Fornitore selezionato" />
+
+    <EditText
+        android:id="@+id/editfornselez"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listView1"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/testoView3"
+        android:layout_marginTop="13dp"
+        android:ems="8"
+        android:inputType="textPersonName"
+        android:text="0" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_below="@+id/editfornselez"
+        android:layout_alignParentStart="true"
+        android:textSize="26dp"
+        android:layout_marginTop="5dp"
+        android:text="Altri Fornitori" />
+    <Button
+        android:text="@string/freccegiu"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonQuant"
+        android:layout_marginLeft="8dp"
+        android:textSize="10dp"
+        android:layout_below="@+id/editfornselez"
+        android:layout_toRightOf="@id/textView1"
+        android:onClick="aggtogliforn"
+        />
+
+    <ListView
+        android:id="@+id/potView1"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:layout_below="@+id/textView1"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"
+        android:dividerHeight="3dp"></ListView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/altrifornitori"
+         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/IDfornsel"
+        />
+    <Button
+        android:text="Fatto"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonFatto"
+        android:textSize="10dp"
+        android:layout_alignParentRight="true"
+
+        android:onClick="AFfatto"
+        />
+</RelativeLayout>
