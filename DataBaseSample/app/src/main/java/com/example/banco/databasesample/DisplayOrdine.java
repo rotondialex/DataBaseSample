@@ -9,13 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class CostoConfezione extends Activity {
+public class DisplayOrdine extends Activity {
     TextView Titolo, testo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_costoconfez);
+        setContentView(R.layout.activity_display_ordine);
         Bundle extras = getIntent().getExtras();
         Titolo = (TextView) findViewById(R.id.titolo);
         testo= (TextView) findViewById(R.id.testo);

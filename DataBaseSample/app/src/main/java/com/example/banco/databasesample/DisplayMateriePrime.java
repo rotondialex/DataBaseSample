@@ -246,7 +246,7 @@ public class DisplayMateriePrime extends AppCompatActivity {
                                 mydb.deleteMateriaprima(id_To_Update);
                                 Toast.makeText(getApplicationContext(), "Cancellazione Avvenuta",
                                         Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(),MateriePrime.class);
                                 startActivity(intent);
                             }
                         })
@@ -337,8 +337,7 @@ public class DisplayMateriePrime extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Non Aggiunto",
                                 Toast.LENGTH_SHORT).show();
                     }
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
             }
         }
@@ -429,12 +428,20 @@ public class DisplayMateriePrime extends AppCompatActivity {
                     inizio = testiMail.getString(testiMail.getColumnIndex(DBtestiMail.TESTI_COL_INTEST));
                     fine = testiMail.getString(testiMail.getColumnIndex(DBtestiMail.TESTI_COL_FINE));
                     testiMail.close();
-
+                    String TestoOrdine="  - " + Integer.toString(intResult) + " " + unmis + " di " + name.getText().toString();
+                    Calendar today= Calendar.getInstance();
+                    if(mydb.insertOrdine( TestoOrdine,Fornit, DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY).format(today.getTime())," "," ")){
+                        Toast.makeText(getApplicationContext(), "Ordine Aggiunto",
+                                Toast.LENGTH_SHORT).show();
+                    } else{
+                        Toast.makeText(getApplicationContext(), "Ordine Non Aggiunto",
+                                Toast.LENGTH_SHORT).show();
+                    }
                     intenzione.setAction(Intent.ACTION_SEND);
                     intenzione.putExtra(Intent.EXTRA_EMAIL,new String[]{ emai});
                     intenzione.putExtra(Intent.EXTRA_SUBJECT, "Ordine");
                     intenzione.putExtra(Intent.EXTRA_TEXT, inizio +
-                            "  - " + Integer.toString(intResult) + " " + unmis + " di " + name.getText().toString() + "\n\r" +
+                            TestoOrdine + "\n\r" +
                             "\n\r" +
                             fine);
                     intenzione.setType("text/plain");

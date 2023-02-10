@@ -16,12 +16,12 @@
 
 
     <TextView
-        android:text="Produzione"
+        android:id="@+id/titolo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/titolo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:text="Ordine effettuato"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button

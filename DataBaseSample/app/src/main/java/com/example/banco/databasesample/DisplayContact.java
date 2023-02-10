@@ -186,7 +186,7 @@ public class DisplayContact extends AppCompatActivity {
                                 mydb.deleteContact(id_To_Update);
                                 Toast.makeText(getApplicationContext(), "Cancellazione Avvenuta",
                                         Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(),Fornitori.class);
                                 startActivity(intent);
                             }
                         })
@@ -249,8 +249,10 @@ public class DisplayContact extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Non Aggiunto",
                             Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);*/
+                finish();
+
             }
         }
     }

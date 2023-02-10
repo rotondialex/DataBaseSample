@@ -5,11 +5,15 @@ package com.example.banco.databasesample;
  */
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -30,9 +35,12 @@ public class Ordini extends AppCompatActivity {
     private ArrayAdapter arrayAdapter;
     DBHelper mydb;
     public EditText cerca;
+    Integer posizOrdine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String Supporto;
+        Integer r,i,Supp;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordini);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -41,11 +49,12 @@ public class Ordini extends AppCompatActivity {
         mydb = new DBHelper(this,"Hichem.db");
         array_list = mydb.getAllOrdini();
         array_listDATA = mydb.getAlldate_Ordini();
-        array_ID = mydb.getAllID();
-
+        array_ID = mydb.getAllID_Ordini();
+        /*for (i=0;i<array_list.size();++i){
+            array_list.set(i,array_list.get(i)+array_listDATA.get(i));
+        }*/
         // Ordino Alfabeticamente
-        String Supporto;
-        Integer r,i,Supp;
+
         String [] Perordinare=array_list.toArray(new String[0]);
         boolean Nonfinito=true;
         while (Nonfinito) {
@@ -71,12 +80,14 @@ public class Ordini extends AppCompatActivity {
         // Fine routine ordinamento
         cerca.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
+                String Supporto;
+                Integer i,r,x,Supp;
                 String testo = cerca.getText().toString();
                 array_list = mydb.getAllOrdiniDaCerca(testo);
                 array_ID = mydb.getAllOrdiniIDdaCerca(testo);
+
                 // Ordino Alfabeticamente
-                String Supporto;
-                Integer r,x,Supp;
+
                 String [] Perordinare=array_list.toArray(new String[0]);
                 boolean Nonfinito=true;
                 while (Nonfinito) {
@@ -118,6 +129,7 @@ public class Ordini extends AppCompatActivity {
 
         obj = (ListView)findViewById(R.id.listView1);
         obj.setAdapter(arrayAdapter);
+        registerForContextMenu(obj);
         obj.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
@@ -125,27 +137,78 @@ public class Ordini extends AppCompatActivity {
 
                     int id_To_Search = arg2;
                     id_To_Search = array_ID.get(id_To_Search);
-                    Bundle dataBundle = new Bundle();
-                    dataBundle.putInt("id", id_To_Search);
+                    String testo;
 
-                    Intent intent = new Intent(getApplicationContext(), DisplayContact.class);
-
-                    intent.putExtras(dataBundle);
-                    startActivity(intent);
+                Cursor res3=mydb.getOrdine(id_To_Search);
+                res3.moveToFirst();
+                testo=res3.getString(res3.getColumnIndex(DBHelper.ORDINIFORN_COL_TESTO));
+                res3.close();
+                Intent intenzione = new Intent(getApplicationContext(), DisplayOrdine.class);
+                intenzione.putExtra("Titolo", "Ordine "+array_list.get(arg2));
+                intenzione.putExtra("Testo", testo);
+                startActivity(intenzione);
 
 
             }
         });
     }
-
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        ListView listaFormule= (ListView) findViewById(R.id.listView1);
+        if (v==listaFormule){
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            posizOrdine=info.position;
+            menu.setHeaderTitle(listaFormule.getItemAtPosition(posizOrdine).toString().toString());
+            menu.add(0, v.getId(), 0, "Elimina Ordine");
+        }
+
+
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+
+
+       if (item.getTitle() == "Elimina Ordine") {
+            final int id_To_Search;
+            id_To_Search = array_ID.get(posizOrdine);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.deleteContact)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            mydb.deleteOrdine(id_To_Search);
+                            Toast.makeText(getApplicationContext(), "Cancellazione Avvenuta",
+                                    Toast.LENGTH_SHORT).show();
+                            /*Intent intent = new Intent(getApplicationContext(), Formule.class);
+                            intent.putExtra("Pino", "ciao");
+                            startActivity(intent);*/
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+
+            AlertDialog d = builder.create();
+            d.setTitle("Sei sicuro di eliminare?");
+            d.show();
+            return true;
+        }
+        else {  return false; }
+    }
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         super.onOptionsItemSelected(item);
 

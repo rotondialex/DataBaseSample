@@ -35,11 +35,13 @@ public class DisplayConfezioni extends AppCompatActivity {
     GridView obj;
     int id_To_Update = 0;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_conf);
         getSupportActionBar().setHomeButtonEnabled(true);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        String pez,ltconf;
         name = (TextView) findViewById(R.id.editTextName);
         pezzi = (TextView) findViewById(R.id.editPezzi);
         litri = (TextView) findViewById(R.id.editLitri);
@@ -60,8 +62,10 @@ public class DisplayConfezioni extends AppCompatActivity {
                 rs.moveToFirst();
 
                 String nam = rs.getString(rs.getColumnIndex(DBHelper.CONF_COL_NAME));
-                String pez=rs.getString(rs.getColumnIndex(DBHelper.CONF_COL_QCT));
-                String ltconf = rs.getString(rs.getColumnIndex(DBHelper.CONF_COL_QPLT));
+                pez=rs.getString(rs.getColumnIndex(DBHelper.CONF_COL_QCT));
+                if(pez.equals("")){pez="0";}
+                ltconf=rs.getString(rs.getColumnIndex(DBHelper.CONF_COL_QPLT));
+                if(ltconf.equals("")){ltconf="0";}
                 String ultmod = rs.getString(rs.getColumnIndex(DBHelper.CONF_COL_CAMPO1));
 
                 if (!rs.isClosed())  {
@@ -204,7 +208,7 @@ public class DisplayConfezioni extends AppCompatActivity {
                                 mydb.deleteConfezione(id_To_Update);
                                 Toast.makeText(getApplicationContext(), "Cancellazione Avvenuta",
                                         Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(),Confezioni.class);
                                 startActivity(intent);
                             }
                         })

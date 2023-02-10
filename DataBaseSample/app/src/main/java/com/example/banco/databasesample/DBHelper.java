@@ -205,6 +205,19 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(COMP_TABLE_NAME, null, contentValues);
         return true;
     }
+    public boolean CreaTabellaOrdini() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(
+                "create table if not exists "+ORDINIFORN_TABLE_NAME+" " + "("+
+                        ORDINIFORN_COL_ID+" integer primary key, "+
+                        ORDINIFORN_COL_IDFORN+" integer, "+
+                        ORDINIFORN_COL_DATA+" text, "+
+                        ORDINIFORN_COL_TESTO+" text, "+
+                        ORDINIFORN_COL_CAMPO1+" text, "+
+                        ORDINIFORN_COL_CAMPO2+" text)"
+        );
+        return true;
+    }
     public boolean insertConfInFormula(Integer idfrm, Integer idmpr, Double percent) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -322,6 +335,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from Fornitori where id="+id+"", null );
+        return res;
+    }
+    public Cursor getOrdine(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME+" where "+ORDINIFORN_COL_ID+"="+id+"", null );
         return res;
     }
     public Cursor getMateriaprima(int id) {
@@ -612,6 +630,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "id = ? ",
                 new String[] { Integer.toString(id) });
     }
+    public Integer deleteOrdine (Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(ORDINIFORN_TABLE_NAME,
+                ORDINIFORN_COL_ID+" = ? ",
+                new String[] { Integer.toString(id) });
+    }
     public Integer deleteFormula (Integer id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from "+COMP_TABLE_NAME+ " where "+COMP_COL_IDFRM+"="+id+"", null );
@@ -781,29 +805,68 @@ public class DBHelper extends SQLiteOpenHelper {
         return array_list;
     }
     public ArrayList<String> getAllOrdiniDaCerca(String DaTrovare) {
-        ArrayList<String> array_list = new ArrayList<String>();
 
+
+        ArrayList<String> array_list = new ArrayList<String>();
+        Integer idforn;
+        String elui;
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME+" where "+ORDINIFORN_COL_TESTO+" LIKE '%"+DaTrovare+"%'", null );
+        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME, null );
         res.moveToFirst();
+        Cursor res2 =  db.rawQuery( "select * from "+CONTACTS_TABLE_NAME, null );
+
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(ORDINIFORN_COL_TESTO)));
+            idforn=res.getInt(res.getColumnIndex(ORDINIFORN_COL_IDFORN));
+            boolean trovato=false;
+            res2.moveToFirst();
+            while (trovato==false && res2.isAfterLast() == false) {
+                if (idforn==res2.getInt(res2.getColumnIndex(CONTACTS_COLUMN_ID))){
+                    elui=res2.getString(res2.getColumnIndex(CONTACTS_COLUMN_NAME));
+                    if (elui.toLowerCase().indexOf(DaTrovare.toLowerCase())!=-1){
+                        array_list.add(elui+" "+res.getString(res.getColumnIndex(ORDINIFORN_COL_DATA)));
+                        trovato=true;
+                    }
+
+                }
+                res2.moveToNext();
+            }
+
             res.moveToNext();
         }
         return array_list;
     }
     public ArrayList<Integer> getAllOrdiniIDdaCerca(String DaTrovare) {
-        ArrayList<Integer> array_list = new ArrayList<Integer>();
 
+
+
+        ArrayList<Integer> array_list = new ArrayList<Integer>();
+        Integer idforn;
+        String elui;
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME+" where "+CONTACTS_COLUMN_NAME+" LIKE "+"'%"+DaTrovare+"%'", null );
+        Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME, null );
         res.moveToFirst();
+        Cursor res2 =  db.rawQuery( "select * from "+CONTACTS_TABLE_NAME, null );
+
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getInt(res.getColumnIndex(ORDINIFORN_COL_ID)));
+            idforn=res.getInt(res.getColumnIndex(ORDINIFORN_COL_IDFORN));
+            boolean trovato=false;
+            res2.moveToFirst();
+            while (trovato==false && res2.isAfterLast() == false) {
+                if (idforn==res2.getInt(res2.getColumnIndex(CONTACTS_COLUMN_ID))){
+                    elui=res2.getString(res2.getColumnIndex(CONTACTS_COLUMN_NAME));
+                    if (elui.toLowerCase().indexOf(DaTrovare.toLowerCase())!=-1){
+                        array_list.add(idforn);
+                        trovato=true;
+                    }
+
+                }
+                res2.moveToNext();
+            }
+
             res.moveToNext();
         }
         return array_list;
@@ -1019,14 +1082,15 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor res =  db.rawQuery( "select * from "+ORDINIFORN_TABLE_NAME, null );
         res.moveToFirst();
         Cursor res2 =  db.rawQuery( "select * from "+CONTACTS_TABLE_NAME, null );
-        res2.moveToFirst();
+
 
         while(res.isAfterLast() == false){
-            idforn=res.getInt(res.getColumnIndex(ORDINIFORN_COL_ID));
+            idforn=res.getInt(res.getColumnIndex(ORDINIFORN_COL_IDFORN));
             boolean trovato=false;
+            res2.moveToFirst();
             while (trovato==false) {
                 if (idforn==res2.getInt(res2.getColumnIndex(CONTACTS_COLUMN_ID))){
-                    array_list.add(res2.getString(res2.getColumnIndex(CONTACTS_COLUMN_NAME)));
+                    array_list.add(res2.getString(res2.getColumnIndex(CONTACTS_COLUMN_NAME))+" "+res.getString(res.getColumnIndex(ORDINIFORN_COL_DATA)));
                     trovato=true;
                 }
                 res2.moveToNext();

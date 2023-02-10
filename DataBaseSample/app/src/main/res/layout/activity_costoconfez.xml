@@ -25,14 +25,14 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button
-        android:text="OK"
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button3"
-        android:onClick="Close"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="99dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="99dp"
+        android:onClick="Close"
+        android:text="OK" />
 
 
 </RelativeLayout>

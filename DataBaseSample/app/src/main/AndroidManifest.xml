@@ -40,6 +40,8 @@
             android:parentActivityName=".Imballaggi"/>
         <activity android:name="DisplayFormule"
             android:parentActivityName=".Formule"/>
+        <activity android:name="DisplayOrdine"
+            android:parentActivityName=".Ordini"/>
         <activity android:name="DuplicaFormula"
             android:parentActivityName=".Formule"/>
         <activity android:name="Fornitori"

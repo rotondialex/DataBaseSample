@@ -10,8 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by Banco on 16/03/2017.
@@ -91,6 +95,14 @@ public class OrdineFornitoreImb extends AppCompatActivity {
         fine=testiMail.getString(testiMail.getColumnIndex(DBtestiMail.TESTI_COL_FINE));
         testiMail.close();
         String emai=email.getText().toString();
+        Calendar today= Calendar.getInstance();
+        if(mydb.insertOrdine( Ord.getText().toString(),Value, DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY).format(today.getTime())," "," ")){
+            Toast.makeText(getApplicationContext(), "Ordine Aggiunto",
+                    Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(getApplicationContext(), "Ordine Non Aggiunto",
+                    Toast.LENGTH_SHORT).show();
+        }
         Intent intenzione = new Intent();
         intenzione.setAction(Intent.ACTION_SEND);
         intenzione.putExtra(Intent.EXTRA_EMAIL, new String[]{emai});

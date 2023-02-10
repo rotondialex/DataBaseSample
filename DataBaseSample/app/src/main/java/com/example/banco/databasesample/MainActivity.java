@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mydb = new DBHelper(this,"Hichem.db");
         testimail= new DBtestiMail(this);
-
+        mydb.CreaTabellaOrdini();
         String[] nameproducts = new String[]{"Fornitori", "Materie Prime", "Imballaggi", "Formule", "Confezioni","Inventario e costi","Impostazioni", "Esci"};
         String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE"};
         Cursor mail=testimail.getAllMail();

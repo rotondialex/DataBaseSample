@@ -427,7 +427,7 @@ public class DisplayFormule extends AppCompatActivity {
                                 mydb.deleteFormula(id_To_Update);
                                 Toast.makeText(getApplicationContext(), "Cancellazione Avvenuta",
                                         Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(),Formule.class);
                                 startActivity(intent);
                             }
                         })

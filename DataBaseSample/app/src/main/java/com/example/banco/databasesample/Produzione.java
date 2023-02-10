@@ -25,7 +25,7 @@ public class Produzione extends Activity {
         Titolo.setText((extras.get("Titolo").toString()));
         testo.setText((extras.get("Testo").toString()));
     }
-    protected void Close(View view){
+    public void Close(View view){
         finish();
     }
 }
