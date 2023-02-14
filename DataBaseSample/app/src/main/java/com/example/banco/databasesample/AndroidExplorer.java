@@ -3,6 +3,7 @@ import java.io.File;
 
 import java.util.ArrayList;
 
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
@@ -15,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Environment;
 import android.view.View;
 
 import android.widget.ArrayAdapter;
@@ -33,8 +35,10 @@ public class AndroidExplorer extends ListActivity {
 
     private List<String> path = null,path2 = null;
 
-    private String root="/";
 
+    File sd = Environment.getExternalStorageDirectory();
+
+    private String root = sd.getAbsolutePath() + "";
     private TextView myPath;
 
 
@@ -60,138 +64,126 @@ public class AndroidExplorer extends ListActivity {
     private void getDir(String dirPath)
 
     {
-
-        myPath.setText("Location: " + dirPath);
-
+        try {
 
 
-        item = new ArrayList<String>();
-
-        path = new ArrayList<String>();
+            myPath.setText("Location: " + dirPath);
 
 
+            item = new ArrayList<String>();
 
-        File f = new File(dirPath);
-
-        File[] files = f.listFiles();
-
+            path = new ArrayList<String>();
 
 
-        if(!dirPath.equals(root))
+            File f = new File(dirPath);
 
-        {
-
-
-
-            item.add(root);
-
-            path.add(root);
+            File[] files = f.listFiles();
 
 
-
-            item.add("../");
-
-            path.add(f.getParent());
+            if (!dirPath.equals(root)) {
 
 
+                item.add(root);
 
-        }
-
-
-
-      for(int i=0; i < files.length; i++)
-
-      {
-
-          File file = files[i];
+                path.add(root);
 
 
-          if (file.isDirectory()) {
-              path.add(file.getPath());
-              item.add(file.getName() + "/");
-          }
-      }
-          String Supporto;
-          Integer r, y, Supp;
-          String[] Perordinare = item.toArray(new String[0]);
-          boolean Nonfinito = true;
-          while (Nonfinito) {
-              y = 0;
-              Nonfinito = false;
-              while (y < Perordinare.length - 1) {
-                  r = Perordinare[y].compareTo(Perordinare[y + 1]);
-                  if (r > 0) {
-                      Nonfinito = true;
-                      Supporto = Perordinare[y];
-                      Perordinare[y] = Perordinare[y + 1];
-                      Perordinare[y + 1] = Supporto;
-                      Supporto = item.get(y);
-                      item.set(y, item.get(y + 1));
-                      item.set(y + 1, Supporto);
-                      Supporto = path.get(y);
-                      path.set(y, path.get(y + 1));
-                      path.set(y + 1, Supporto);
+                item.add("../");
 
-                  }
-                  y = y + 1;
-              }
-          }
+                path.add(f.getParent());
 
 
-
-
-        item2 = new ArrayList<String>();
-
-        path2 = new ArrayList<String>();
-        for(int i=0; i < files.length; i++)
-
-        {
-
-            File file = files[i];
-
-            if(!file.isDirectory())
-            {
-                path2.add(file.getPath());
-                item2.add(file.getName());
             }
-        }
 
-       Perordinare=item2.toArray(new String[0]);
-       Nonfinito=true;
-        while (Nonfinito) {
-            y=0;
-            Nonfinito=false;
-            while (y<Perordinare.length-1){
-                r=Perordinare[y].compareTo(Perordinare[y+1]);
-                if (r>0){
-                    Nonfinito=true;
-                    Supporto=Perordinare[y];
-                    Perordinare[y]=Perordinare[y+1];
-                    Perordinare[y+1]=Supporto;
-                    Supporto=item2.get(y);
-                    item2.set(y,item2.get(y+1));
-                    item2.set(y+1,Supporto);
-                    Supporto=path2.get(y);
-                    path2.set(y,path2.get(y+1));
-                    path2.set(y+1,Supporto);
+            for (int i = 0; i < files.length; i++) {
 
+                File file = files[i];
+
+
+                if (file.isDirectory()) {
+                    path.add(file.getPath());
+                    item.add(file.getName() + "/");
                 }
-                y=y+1;
             }
+            String Supporto;
+            Integer r, y, Supp;
+            String[] Perordinare = item.toArray(new String[0]);
+            boolean Nonfinito = true;
+            while (Nonfinito) {
+                y = 0;
+                Nonfinito = false;
+                while (y < Perordinare.length - 1) {
+                    r = Perordinare[y].compareTo(Perordinare[y + 1]);
+                    if (r > 0) {
+                        Nonfinito = true;
+                        Supporto = Perordinare[y];
+                        Perordinare[y] = Perordinare[y + 1];
+                        Perordinare[y + 1] = Supporto;
+                        Supporto = item.get(y);
+                        item.set(y, item.get(y + 1));
+                        item.set(y + 1, Supporto);
+                        Supporto = path.get(y);
+                        path.set(y, path.get(y + 1));
+                        path.set(y + 1, Supporto);
+
+                    }
+                    y = y + 1;
+                }
+            }
+
+
+            item2 = new ArrayList<String>();
+
+            path2 = new ArrayList<String>();
+            for (int i = 0; i < files.length; i++) {
+
+                File file = files[i];
+
+                if (!file.isDirectory()) {
+                    path2.add(file.getPath());
+                    item2.add(file.getName());
+                }
+            }
+
+            Perordinare = item2.toArray(new String[0]);
+            Nonfinito = true;
+            while (Nonfinito) {
+                y = 0;
+                Nonfinito = false;
+                while (y < Perordinare.length - 1) {
+                    r = Perordinare[y].compareTo(Perordinare[y + 1]);
+                    if (r > 0) {
+                        Nonfinito = true;
+                        Supporto = Perordinare[y];
+                        Perordinare[y] = Perordinare[y + 1];
+                        Perordinare[y + 1] = Supporto;
+                        Supporto = item2.get(y);
+                        item2.set(y, item2.get(y + 1));
+                        item2.set(y + 1, Supporto);
+                        Supporto = path2.get(y);
+                        path2.set(y, path2.get(y + 1));
+                        path2.set(y + 1, Supporto);
+
+                    }
+                    y = y + 1;
+                }
+            }
+
+            for (int i = 0; i < item2.size(); i++) {
+                path.add(path2.get(i));
+                item.add(item2.get(i));
+            }
+
+
+            ArrayAdapter<String> fileList =
+
+                    new ArrayAdapter<String>(this, R.layout.row, item);
+
+            setListAdapter(fileList);
         }
-
-        for(int i=0; i < item2.size(); i++) {
-            path.add(path2.get(i));
-            item.add(item2.get(i));
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
-
-
-                ArrayAdapter<String> fileList =
-
-                        new ArrayAdapter<String>(this, R.layout.row, item);
-
-                setListAdapter(fileList);
-
     }
 
 
